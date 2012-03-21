@@ -1,0 +1,92 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MasterPageStudent.master.cs" Inherits="MasterPageStudent" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>无标题页</title>
+    <asp:ContentPlaceHolder id="head" runat="server">
+    </asp:ContentPlaceHolder>
+    
+    <!-- Le styles -->
+    <link href="../assets/css/bootstrap.css" rel="stylesheet" type="text/css" />
+    <link href="../assets/css/bootstrap-responsive.css" rel="stylesheet" type="text/css" />
+    <link href="../assets/css/bootstrap-plus.css" rel="stylesheet" type="text/css" />
+    <link href="../assets/css/main.css" rel="stylesheet" type="text/css" />
+    
+    <style type="text/css">
+      body {
+        padding-top: 60px;
+        padding-bottom: 40px;
+      }
+      .sidebar-nav {
+        padding: 9px 0;
+      }
+    </style>
+    
+    <!-- Le javascript -->
+
+    <script src="../assets/js/jquery.js" type="text/javascript"></script>
+    <script src="../assets/js/jquery.patch.js" type="text/javascript"></script>
+    <script src="../assets/js/jquery.form.js" type="text/javascript"></script>
+    <script src="../assets/js/jquery.metadata.js" type="text/javascript"></script>    
+    <script src="../assets/js/jquery.validate.js" type="text/javascript"></script>
+    <script src="../assets/js/jquery.validate.messages_cn.js" type="text/javascript"></script>
+    <script src="../assets/js/bootstrap.js" type="text/javascript"></script>
+    <script src="../assets/js/main.js" type="text/javascript"></script>
+    
+</head>
+<body>
+    
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <span class="brand" style="color: #DD390D;">综合导师系统</span>
+          <div class="nav-collapse">
+            <ul class="nav">
+              <li class="active"><a href="#">主页</a></li>
+              <li><a href="#about">关于作品</a></li>
+              <li><a href="#contact">作者</a></li>
+            </ul>
+            <p class="navbar-text pull-right">Logged in as <a href="#">username</a></p>
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+    
+    <div class="container-fluid">
+      <div class="row-fluid">
+        <div class="span2">
+          <div class="well sidebar-nav">
+            <ul class="nav nav-list">
+              <li class="nav-header">帐号设置</li>
+              <li class="active"><a href="SInfo.aspx">个人信息</a></li>
+              <li><a href="#">修改头像</a></li>
+              <li><a href="SPwd.aspx">修改密码</a></li>
+              <li class="nav-header">选配导师</li>
+              <li><a href="#">填写志愿</a></li>
+              <li><a href="#">查看志愿</a></li>
+              <li class="nav-header">站内消息</li>
+              <li><a href="#"><span class="label label-important" style="padding: 6px 8px;line-height: 30px;">发送消息</span></a></li>
+              <li><a href="#" style="color: #DD4B39;">收件箱<span>(6)</span></a></li>
+              <li><a href="#">已发送</a></li>
+            </ul>
+          </div><!--/.well -->
+        </div><!--/span-->
+        <!--aaaa--> 
+        <asp:ContentPlaceHolder id="ContentPlaceHolder1" runat="server">
+        
+        </asp:ContentPlaceHolder>
+          		
+      </div><!--/row-->
+
+      <hr />
+
+      <footer>
+        <p>&copy; Company 2012</p>
+      </footer>
+
+    </div><!--/.fluid-container-->
+    
+</body>
+</html>

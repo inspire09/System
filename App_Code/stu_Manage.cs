@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Data;
-using System.Data.SqlClient;
 using System.Configuration;
 using System.Linq;
 using System.Web;
@@ -11,13 +10,17 @@ using System.Web.UI.WebControls;
 using System.Web.UI.WebControls.WebParts;
 using System.Xml.Linq;
 
-/// <summary>
-///SqlClass 的摘要说明
-/// </summary>
-public class SqlClass
-{
+using System.Data;
+using System.Data.SqlClient;
+using System.Configuration;
+using System.Collections.Generic;
 
-	public SqlClass()
+/// <summary>
+///stu_Manage 的摘要说明
+/// </summary>
+public class stu_Manage
+{
+	public stu_Manage()
 	{
 		//
 		//TODO: 在此处添加构造函数逻辑
@@ -31,17 +34,22 @@ public class SqlClass
         return myConn;
     }
 
-    public int Login(string userID,string userPass,string privilege)
+    public student stu_Insert(string sno, string sname)
     {
+        student stu = new student();
         SqlConnection myConn = GetConnection();
         myConn.Open();
-        SqlCommand myCmd = new SqlCommand("userLogin", myConn);
+        SqlCommand myCmd = new SqlCommand("stuInsert", myConn);
         myCmd.CommandType = CommandType.StoredProcedure;
-        myCmd.Parameters.Add("@userID", SqlDbType.Char, 20).Value = userID;
-        myCmd.Parameters.Add("@userPass", SqlDbType.Char, 20).Value = userPass;
-        myCmd.Parameters.Add("@privilege", SqlDbType.Char, 20).Value = privilege;
-        int result = (int)myCmd.ExecuteScalar();
+        myCmd.Parameters.AddWithValue("@sno", sno);
+        myCmd.Parameters.AddWithValue("@sname", sname);
+        if (myCmd.ExecuteNonQuery() > 0)
+        {
+            stu.sno = sno;
+            stu.sname = sname;
+        }   
         myConn.Close();
-        return result;        
+        return stu;
     }
+
 }

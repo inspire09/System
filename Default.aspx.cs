@@ -13,7 +13,6 @@ using System.Xml.Linq;
 
 public partial class _Default : System.Web.UI.Page 
 {
-    static SqlClass mysql = new SqlClass();
 
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -23,13 +22,27 @@ public partial class _Default : System.Web.UI.Page
     {
         string userID = TextBoxUserID.Text;
         string userPass = TextBoxUserPass.Text;
-        string privilege = "学生";
-        //string myStr = "select count(*) from userTable where userID='" + userID + "' and userPass='" + userPass + "' and privilege='" + privilege + "'";       
-        int result = mysql.Login(userID,userPass,privilege);
+        string privilege = DropDownListPrivilege.SelectedValue.ToString();
+
+        string myStr = ConfigurationManager.ConnectionStrings["ChoiceSystem"].ConnectionString;
+        SqlConnection myConn = new SqlConnection(myStr);
+        myConn.Open();
+        SqlCommand myCmd = new SqlCommand("userLogin", myConn);
+        myCmd.CommandType = CommandType.StoredProcedure;
+        myCmd.Parameters.Add("@userID", SqlDbType.Char, 20).Value = userID;
+        myCmd.Parameters.Add("@userPass", SqlDbType.Char, 20).Value = userPass;
+        myCmd.Parameters.Add("@privilege", SqlDbType.Char, 20).Value = privilege;
+        int result = (int)myCmd.ExecuteScalar();
+        myConn.Close();
         if (result > 0)
         {
             Session["userID"] = userID;
-            Response.Redirect("Student/SDefault.aspx");
+            if(privilege=="学生")
+                Response.Redirect("Student/SDefault.aspx");
+            else if(privilege=="教师")
+                Response.Redirect("Student/SDefault.aspx");
+            else if (privilege == "管理员")
+                Response.Redirect("Student/SDefault.aspx");
         }
         else
         {

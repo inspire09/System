@@ -11,9 +11,13 @@ using System.Web.UI.WebControls;
 using System.Web.UI.WebControls.WebParts;
 using System.Xml.Linq;
 
-public partial class Student_SDefault : System.Web.UI.Page
+public partial class Teacher_TPassword : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
+    {
+
+    }
+    protected void ButtonUpdate_Click(object sender, EventArgs e)
     {
 
     }

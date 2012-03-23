@@ -37,6 +37,7 @@ public class stu_Manage
     public student stu_Insert(string sno, string sname)
     {
         student stu = new student();
+        stu.Sno = sno;
         SqlConnection myConn = GetConnection();
         myConn.Open();
         SqlCommand myCmd = new SqlCommand("stuInsert", myConn);
@@ -45,8 +46,8 @@ public class stu_Manage
         myCmd.Parameters.AddWithValue("@sname", sname);
         if (myCmd.ExecuteNonQuery() > 0)
         {
-            stu.sno = sno;
-            stu.sname = sname;
+            stu.Sno = sno;
+            stu.Sname = sname;
         }   
         myConn.Close();
         return stu;

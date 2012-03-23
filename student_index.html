@@ -48,7 +48,7 @@
                 $.ajax({
                     type: "POST",
                     url: "student_insert.ashx", 
-                    data: "{'sno':'1004','sname':'万事如意'}",
+                    data: "{sno:'1004',sname:'万如意'}",
                     dataType: "json",
                     success: function(data){
                         alert("修改个人信息成功！");
@@ -62,12 +62,9 @@
 
   <body>
 
-    <div class="navbar navbar-fixed-top"></div>
-
     <div class="container-fluid">
       <div class="row-fluid">
-        <div id="sidebar" class="span2">
-        </div><!--/span-->
+        
         <div id="content" class="span10">
         	<ul class="breadcrumb">
 					  <li>

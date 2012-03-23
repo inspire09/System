@@ -14,7 +14,6 @@ using System.Xml.Linq;
 
 public partial class Student_SInfo : System.Web.UI.Page
 {
-    bool isFirst = true;
     protected void Page_Load(object sender, EventArgs e)
     {
         Session["userID"] = "1001";
@@ -48,7 +47,6 @@ public partial class Student_SInfo : System.Web.UI.Page
                     TextBoxHonour.Text = reader["honour"].ToString();
                     TextBoxIntro.Text = reader["intro"].ToString();
                     TextBoxRemark.Text = reader["remark"].ToString();
-                    isFirst = false;
                 }
                 //关闭数据读取对象
                 reader.Close();
@@ -63,9 +61,6 @@ public partial class Student_SInfo : System.Web.UI.Page
         myConn.Open();
         SqlCommand myCmd = new SqlCommand("stuUpdate", myConn);
         myCmd.CommandType = CommandType.StoredProcedure;
-        
-        if (isFirst==true)
-            myCmd.CommandText = "stuInsert";
          
         myCmd.Parameters.AddWithValue("@sno", TextBoxSno.Text);
         myCmd.Parameters.AddWithValue("@sname", TextBoxName.Text);

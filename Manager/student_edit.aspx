@@ -119,7 +119,7 @@
 		</ul>
 		<div class="tab-content">
 			<div class="<%= showClass %>" id="show">
-				<div class="span10">
+				<div class="">
 					<table class="table table-bordered table-striped">
 						<tbody>
 				          <tr>
@@ -260,7 +260,7 @@
           	    </form>
           	</div>
           	<div class="<%= delClass %>" id="del">
-          		<div class="alert alert-block alert-error fade in span10">
+          		<div class="alert alert-block alert-error fade in">
 		            <h4 class="alert-heading">删除</h4>
 		            <p>是否确定删除？</p>
 		            <p>

@@ -63,7 +63,7 @@ public class student
         get { return this.major; }
         set { this.major = value; }
     }
-    public string Class
+    public string Sclass
     {
         get { return this.sclass; }
         set { this.sclass = value; }

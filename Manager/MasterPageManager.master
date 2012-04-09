@@ -57,9 +57,41 @@
         </div>
       </div>
     </div>
+    
+    
+    <div class="container-fluid">
+      <div class="row-fluid">
+        <div class="span2">
+          <div class="well sidebar-nav">
+            <ul class="nav nav-list">
+              <li class="nav-header">用户管理</li>
+              <li class="active"><a href="#">学生管理</a></li>
+              <li><a href="#">教师管理</a></li>
+              <li><a href="#">修改密码</a></li>
+              <li class="nav-header">选录学生</li>
+              <li><a href="#">选录</a></li>
+              <li><a href="#">查看/删除</a></li>
+              <li class="nav-header">站内消息</li>
+              <li><a href="#"><span class="label label-important" style="padding: 6px 8px;line-height: 30px;">发送消息</span></a></li>
+              <li><a href="#" style="color: #DD4B39;">收件箱<span>(6)</span></a></li>
+              <li><a href="#">已发送</a></li>
+            </ul>
+          </div><!--/.well -->
+        </div><!--/span-->
+        <!--aaaa--> 
         <asp:ContentPlaceHolder id="ContentPlaceHolder1" runat="server">
         
         </asp:ContentPlaceHolder>
+          		
+      </div><!--/row-->
+
+      <hr />
+
+      <footer>
+        <p>&copy; Company 2012</p>
+      </footer>
+
+    </div><!--/.fluid-container-->
     
 </body>
 </html>

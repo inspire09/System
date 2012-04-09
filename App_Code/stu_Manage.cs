@@ -10,9 +10,7 @@ using System.Web.UI.WebControls;
 using System.Web.UI.WebControls.WebParts;
 using System.Xml.Linq;
 
-using System.Data;
 using System.Data.SqlClient;
-using System.Configuration;
 using System.Collections.Generic;
 
 /// <summary>
@@ -34,10 +32,37 @@ public class stu_Manage
         return myConn;
     }
 
+    public student stu_Info(string sno)
+    {
+        student stu = new student();
+        SqlConnection myConn = GetConnection();
+        myConn.Open();
+        SqlCommand myCmd = new SqlCommand("stuInfo", myConn);
+        myCmd.CommandType = CommandType.StoredProcedure;
+        myCmd.Parameters.AddWithValue("@sno", sno);
+        SqlDataReader reader = myCmd.ExecuteReader();
+        if (reader.Read())
+        {
+            stu.Sno = sno;
+            stu.Sname = reader["sname"].ToString();
+            stu.Sex = reader["sex"].ToString();
+            stu.Institute = reader["institute"].ToString();
+            stu.Major = reader["major"].ToString();
+            stu.Sclass = reader["sclass"].ToString();
+            stu.Tel = reader["tel"].ToString();
+            stu.Email = reader["email"].ToString();
+            stu.EnglishLevel = reader["englishLevel"].ToString();
+            stu.Honour = reader["honour"].ToString();
+            stu.Intro = reader["intro"].ToString();
+            stu.Remark = reader["remark"].ToString();
+        }   
+        myConn.Close();
+        return stu;
+    }
+
     public student stu_Insert(string sno, string sname)
     {
         student stu = new student();
-        stu.Sno = sno;
         SqlConnection myConn = GetConnection();
         myConn.Open();
         SqlCommand myCmd = new SqlCommand("stuInsert", myConn);
@@ -48,9 +73,50 @@ public class stu_Manage
         {
             stu.Sno = sno;
             stu.Sname = sname;
-        }   
+        }
         myConn.Close();
         return stu;
+    }
+
+    public bool stu_Update(student stu)
+    {
+        SqlConnection myConn = GetConnection();
+        myConn.Open();
+        SqlCommand myCmd = new SqlCommand("stuUpdate", myConn);
+        myCmd.CommandType = CommandType.StoredProcedure;
+        myCmd.Parameters.AddWithValue("@sno", stu.Sno);
+        myCmd.Parameters.AddWithValue("@sname", stu.Sname);
+        myCmd.Parameters.AddWithValue("@sex", stu.Sex);
+        myCmd.Parameters.AddWithValue("@institute", stu.Institute);
+        myCmd.Parameters.AddWithValue("@major", stu.Major);
+        myCmd.Parameters.AddWithValue("@sclass", stu.Sclass);
+        myCmd.Parameters.AddWithValue("@tel", stu.Tel);
+        myCmd.Parameters.AddWithValue("@email", stu.Email);
+        myCmd.Parameters.AddWithValue("@englishLevel", stu.EnglishLevel);
+        myCmd.Parameters.AddWithValue("@Honour", stu.Honour);
+        myCmd.Parameters.AddWithValue("@Intro", stu.Intro);
+        myCmd.Parameters.AddWithValue("@Remark", stu.Remark);
+        int i = myCmd.ExecuteNonQuery();
+        myConn.Close();
+        if (i > 0)
+            return true;
+        else
+            return false;
+    }
+
+    public bool stu_Delete(string sno)
+    {
+        SqlConnection myConn = GetConnection();
+        myConn.Open();
+        string myStr = "delete from studentInfo where sno=@sno";
+        SqlCommand myCmd = new SqlCommand(myStr, myConn);
+        myCmd.Parameters.AddWithValue("@sno", sno);
+        int i = myCmd.ExecuteNonQuery();
+        myConn.Close();
+        if (i > 0)
+            return true;
+        else
+            return false;
     }
 
 }

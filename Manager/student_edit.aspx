@@ -113,12 +113,12 @@
 			<li class="active">编辑</li>
 		</ul>
         <ul class="nav nav-tabs">
-			<li><a href="#show" data-toggle="tab">查看</a></li>
-			<li><a href="#edit" data-toggle="tab">编辑</a></li>
-			<li class="active"><a href="#del" data-toggle="tab">删除</a></li>
+			<li class="<%= showLi %>" ><a href="#show" data-toggle="tab">查看</a></li>
+			<li class="<%= editLi %>" ><a href="#edit" data-toggle="tab">编辑</a></li>
+			<li class="<%= delLi %>" ><a href="#del" data-toggle="tab">删除</a></li>
 		</ul>
 		<div class="tab-content">
-			<div class="tab-pane fade" id="show">
+			<div class="<%= showClass %>" id="show">
 				<div class="span10">
 					<table class="table table-bordered table-striped">
 						<tbody>
@@ -174,7 +174,7 @@
 					</table>
 				</div>
 			</div>
-			<div class="tab-pane fade" id="edit">
+			<div class="<%= editClass %>" id="edit">
           	    <form class="form-horizontal" id="form_edit" action="student_edit.aspx">
           		    <fieldset>
           			    <div class="control-group">
@@ -259,7 +259,7 @@
           		    </fieldset>
           	    </form>
           	</div>
-          	<div class="tab-pane fade active in" id="del">
+          	<div class="<%= delClass %>" id="del">
           		<div class="alert alert-block alert-error fade in span10">
 		            <h4 class="alert-heading">删除</h4>
 		            <p>是否确定删除？</p>

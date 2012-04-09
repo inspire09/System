@@ -14,6 +14,9 @@ public partial class Manager_student_edit : System.Web.UI.Page
     public string showClass = "";
     public string editClass = "";
     public string delClass = "";
+    public string showLi = "";
+    public string editLi = "";
+    public string delLi = "";
     protected void Page_Load(object sender, EventArgs e)
     {
         if (!IsPostBack)
@@ -27,22 +30,23 @@ public partial class Manager_student_edit : System.Web.UI.Page
                 showClass = "tab-pane fade active in";
                 editClass = "tab-pane fade";
                 delClass = "tab-pane fade";
+                showLi = "active";
+                
             }
             else if (operat == "edit")
             {
                 showClass = "tab-pane fade";
                 editClass = "tab-pane fade active in";
                 delClass = "tab-pane fade";
+                editLi = "active";
             }
             else if (operat == "del")
             {
                 showClass = "tab-pane fade";
                 editClass = "tab-pane fade";
                 delClass = "tab-pane fade active in";
-            }
-
-            
-            
+                delLi = "active";
+            }       
         }
     }
 

@@ -43,7 +43,7 @@
 				        <option value="0">编号</option>
 				        <option value="1">姓名</option>
 				    </select>
-					<input type="text" class="input-medium search-query span3">
+					<input type="text" class="input-medium search-query span3" />
 					<button type="submit" class="btn btn-primary"><i class="icon-search icon-white"></i> 查询</button>
 				</form>
 				<table class="table table-striped">
@@ -66,9 +66,9 @@
 				            <td>13616551237</td>
 				            <td class="options">
 				            	<ul class="inline">
-							        <li><a href="student_edit.aspx?sno='1001'&operat='show'">查看</a></li>
-							        <li><a href="student_edit.aspx?sno='1001'&operat='edit'">编辑</a></li>
-							        <li><a href="student_edit.aspx?sno='1001'&operat='del'">删除</a></li>
+							        <li><a href="student_edit.aspx?sno=1001&operat=show">查看</a></li>
+							        <li><a href="student_edit.aspx?sno=1001&operat=edit">编辑</a></li>
+							        <li><a href="student_edit.aspx?sno=1001&operat=del">删除</a></li>
 							    </ul>
 				            </td>
 				        </tr>

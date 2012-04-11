@@ -1,31 +1,24 @@
-﻿<%@ Page Language="C#" MasterPageFile="~/Manager/MasterPageManager.master" AutoEventWireup="true" CodeFile="student_index.aspx.cs" Inherits="Manager_student_index" Title="无标题页" %>
+﻿<%@ Page Language="C#" MasterPageFile="MasterPageManager.master" AutoEventWireup="true" CodeFile="student_index.aspx.cs" Inherits="Manager_student_index" Title="无标题页" %>
 
-<asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
+<asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
+<script type="text/javascript">
+    $(function() {
+        $('#form_Add').ajaxForm(function() {
+            $.ajax({
+                type: "POST",
+                contentType: "application/json",
+                url: "student_index.aspx/student_insert",
+                data: "{sno:'" + $("#InputSno").val() + "',sname:'" + $("#InputSname").val() + "'}",
+                dataType: "json",
+                success: function(result) {
+                    alert("新增用户成功");
+                }
+            });
 
-    <script src="../assets/js/jquery.js" type="text/javascript"></script>
-        <script type="text/javascript">
-            $(function() {
-                $('#form_Add').ajaxForm(function() {
-                    $.ajax({
-                        type: "POST",
-                        contentType: "application/json",
-                        url: "student_index.aspx/student_insert",
-                        data: "{sno:'" + $("#InputSno").val() + "',sname:'" + $("#InputSname").val() + "'}",
-                        dataType: "json",
-                        success: function(result) {
-                            alert("新增用户成功");
-                        }
-                    });
-
-                });
-            }); 
-        </script>
-
-</asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
+        });
+    }); 
+</script>
     
-    
-    <div id="content" class="span10">
         <ul class="breadcrumb">
 			<li>
 			    <a href="#">Home</a> <span class="divider">/</span>
@@ -140,7 +133,6 @@
 	          	</form>
 			</div>
 		</div>
-    </div><!--/span-->
 				
 		    
 </asp:Content>

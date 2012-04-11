@@ -1,10 +1,7 @@
-﻿<%@ Page Language="C#" MasterPageFile="~/MasterPageTeacher.master" AutoEventWireup="true" CodeFile="TPassword.aspx.cs" Inherits="Teacher_TPassword" Title="无标题页" %>
+﻿<%@ Page Language="C#" MasterPageFile="MasterPageTeacher.master" AutoEventWireup="true" CodeFile="TPassword.aspx.cs" Inherits="Teacher_TPassword" Title="无标题页" %>
 
-<asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
-</asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
 
-<div class="span10">
           <div class="row-fluid">
           	<form id="form1" runat="server" class="form-horizontal">
           		<fieldset>
@@ -35,7 +32,6 @@
           		</fieldset>
           	</form>
           </div>
-        </div><!--/span-->  
 
 </asp:Content>
 

@@ -1,12 +1,7 @@
-﻿<%@ Page Language="C#" MasterPageFile="~/MasterPageTeacher.master" AutoEventWireup="true" CodeFile="TInfo.aspx.cs" Inherits="Teacher_TInfo" Title="无标题页" %>
+﻿<%@ Page Language="C#" MasterPageFile="MasterPageTeacher.master" AutoEventWireup="true" CodeFile="TInfo.aspx.cs" Inherits="Teacher_TInfo" Title="无标题页" %>
 
-<asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
-</asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
     
-    
-        
-        <div class="span10">
           <div class="row-fluid">
           	<form id="form2" runat="server" class="form-horizontal">
           	
@@ -113,7 +108,6 @@
           		</fieldset>
           	</form>
           </div>
-        </div><!--/span-->
 
 </asp:Content>
 

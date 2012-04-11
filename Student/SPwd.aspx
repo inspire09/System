@@ -2,7 +2,6 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
 
-    <div class="span10">
           <div class="row-fluid">
           	<form id="form1" runat="server" class="form-horizontal">
           		<fieldset>
@@ -33,7 +32,6 @@
           		</fieldset>
           	</form>
           </div>
-        </div><!--/span-->  
          
 </asp:Content>
 

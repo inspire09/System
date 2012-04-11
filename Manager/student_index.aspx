@@ -1,23 +1,6 @@
 ﻿<%@ Page Language="C#" MasterPageFile="MasterPageManager.master" AutoEventWireup="true" CodeFile="student_index.aspx.cs" Inherits="Manager_student_index" Title="无标题页" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
-<script type="text/javascript">
-    $(function() {
-        $('#form_Add').ajaxForm(function() {
-            $.ajax({
-                type: "POST",
-                contentType: "application/json",
-                url: "student_index.aspx/student_insert",
-                data: "{sno:'" + $("#InputSno").val() + "',sname:'" + $("#InputSname").val() + "'}",
-                dataType: "json",
-                success: function(result) {
-                    alert("新增用户成功");
-                }
-            });
-
-        });
-    }); 
-</script>
     
         <ul class="breadcrumb">
 			<li>

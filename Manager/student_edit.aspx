@@ -75,7 +75,7 @@
 				</div>
 			</div>
 			<div class="<%= editClass %>" id="edit">
-          	    <form class="form-horizontal" id="form_edit" action="student_edit.aspx" method="post">
+          	    <form class="form-horizontal" id="form_edit" method="post">
           		    <fieldset>
           			    <div class="control-group">
           				    <label class="control-label" for="username">学号:</label>

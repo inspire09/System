@@ -40,4 +40,3 @@ function showMsg(){
 	
 	$show_div.prepend(html);
 }
-

@@ -79,11 +79,11 @@ public partial class Manager_student_edit : System.Web.UI.Page
     }
 
     [WebMethod]
-    public static string student_edit(string sname,string sex,string institute,string major,
+    public static string student_edit(string ssno, string sname,string sex,string institute,string major,
         string sclass,string tel,string email,string eng, string honour,string intro,string remark)
     {
         student stu = new student();
-        stu.Sno = sno;
+        stu.Sno = ssno;
         stu.Sname = sname;
         stu.Sex = sex;
         stu.Institute = institute;

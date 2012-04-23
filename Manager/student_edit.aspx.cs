@@ -22,12 +22,8 @@ public partial class Manager_student_edit : System.Web.UI.Page
     {
         if (!IsPostBack)
         {
-            //sno = Request.QueryString["sno"].ToString();
-            //string operat = Request.QueryString["operat"].ToString();
-            sno = Request.Params["sno"].ToString();
-            string operat = Request.Params["operat"].ToString();
-            //sno = "1003";
-            //string operat = "del";
+            sno = Request.QueryString["sno"].ToString();
+            string operat = Request.QueryString["operat"].ToString();
             
             if (operat == "show")
             {

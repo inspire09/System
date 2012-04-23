@@ -75,18 +75,18 @@
 				</div>
 			</div>
 			<div class="<%= editClass %>" id="edit">
-          	    <form class="form-horizontal" id="stu_edit_form" action="student_edit.aspx" method="post">
+          	    <form class="form-horizontal" id="stu_edit_form" method="post">
           		    <fieldset>
           			    <div class="control-group">
           				    <label class="control-label" for="username">学号:</label>
           				    <div class="controls">
-          					    <input type="text" class="input-xlarge" validation="{required:true}" name="ssno" id="stu_sno_input" />
+          					    <input type="text" class="input-xlarge" validation="{required:true}" id="stu_sno_input" />
 			                </div>
           			    </div>
           			    <div class="control-group">
           				    <label class="control-label" for="username">姓名:</label>
           				    <div class="controls">
-			                    <input type="text" class="input-xlarge" validation="{required:true}" name="sname" id="stu_sname_input" />
+			                    <input type="text" class="input-xlarge" validation="{required:true}" id="stu_sname_input" />
 			                </div>
           			    </div>
           			    <div class="control-group">
@@ -101,7 +101,7 @@
 		                <div class="control-group">
           				    <label class="control-label" for="username">学院:</label>
           				    <div class="controls">
-			                    <input type="text" class="input-xlarge" validation="{required:true}" name="institute" id="stu_institute_input" />
+			                    <input type="text" class="input-xlarge" validation="{required:true}" id="stu_institute_input" />
 			                </div>
           			    </div>
           			    <div class="control-group">
@@ -125,7 +125,7 @@
           		    	<div class="control-group">
           			    	<label class="control-label" for="username">Email:</label>
           		    		<div class="controls">
-			                    <input type="text" class="input-xlarge" name="email" id="stu_email_input" />
+			                    <input type="text" class="input-xlarge" validation="{email:true}" name="email" id="stu_email_input" />
 			               </div>
           			    </div>
           			    <div class="control-group">

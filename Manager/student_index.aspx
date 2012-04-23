@@ -14,7 +14,7 @@
 		</ul>
 		<div class="tab-content">
 			<div class="tab-pane fade active in" id="list">
-				<form class="form-search" id="stu_select_form" method="post" action="student_index.aspx">
+				<form class="form-search" id="stu_select_form" method="post">
 					<select id="SelectName" class="span2">
 				        <option value="学号">学号</option>
 				        <option value="姓名">姓名</option>
@@ -53,18 +53,18 @@
 				</div>
 			</div>
 			<div class="tab-pane fade" id="add">
-				<form id="stu_add_form" class="form-horizontal" method="post">
+				<form id="stu_add_form" class="form-horizontal" method="post" >
 	          		<fieldset>
 	          			<div class="control-group">
 	          				<label class="control-label" for="username">学号:</label>
 	          				<div class="controls">
-	          					<input type="text" class="input-xlarge" id="sno_input" />
+	          					<input type="text" class="input-xlarge" validation="{required:true}" name="sno" id="sno_input" />
 				            </div>
 	          			</div>
 	          			<div class="control-group">
 	          				<label class="control-label" for="username">姓名:</label>
 	          				<div class="controls">
-				              <input type="text" class="input-xlarge" id="sname_input" />
+				              <input type="text" class="input-xlarge" validation="{required:true}" name="sname" id="sname_input" />
 				            </div>
 	          			</div>
 				        <div class="form-actions">

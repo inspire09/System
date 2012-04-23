@@ -3,26 +3,44 @@
 
 /************* student_index *****************/
 $(function() {
-    $('#stu_add_form').ajaxForm(function() {
-        $.ajax({
-            type: "POST",
-            contentType: "application/json",
-            url: "student_index.aspx/student_insert",
-            data: "{sno:'" + $("#sno_input").val() + "',sname:'" + $("#sname_input").val() + "'}",
-            dataType: "json",
-            success: function(result) {
-                $("#sno_input").val("");
-                $("#sname_input").val("");
-                alert("新增用户成功");
-            }
-        });
-    });
 
+    /*$('#stu_add_form').validate({
+    submitHandler: function(form) {	// 验证成功后会执行该方法
+    $(form).ajaxSubmit({
+    success: function(result) {
+    $("#sno_input").val("");
+    $("#sname_input").val("");
+    alert("新增用户成功");
+    }
+    });
+    }
+    });*/
+    $('#stu_add_form').validate({
+        submitHandler: function(form) {	// 验证成功后会执行该方法
+            $(form).ajaxSubmit(function() {
+                $.ajax({
+                    type: "POST",
+                    contentType: "application/json",
+                    url: "student_index.aspx/student_insert",
+                    data: "{sno:'" + $("#sno_input").val() + "',sname:'" + $("#sname_input").val() + "'}",
+                    dataType: "json",
+                    success: function(result) {
+                        $("#sno_input").val("");
+                        $("#sname_input").val("");
+                        alert("新增用户成功");
+                    }
+                });
+            });
+        }
+    });
+    
     $("#stu_add_tab").click(function() {
         $("#SelectName").val("学号");
         $("#InputValue").val("");
     });
-    
+
+    //$("table").tablesorter();
+
     var options = function() {
         $.ajax({
             type: "POST",
@@ -47,7 +65,9 @@ $(function() {
                     str = str + "</ul></td></tr>";
                 });
                 $("#stu_info_tbody").html(str);
-
+                //$("table").trigger("update");
+                //var sorting = [[0, 0]];
+                //$("table").trigger("sorton", [sorting]);
             }
         });
     };
@@ -58,12 +78,6 @@ $(function() {
         return false;
     });
 
-    $("#list table").tablesorter({
-        sortList: [[0, 0]],
-        headers: {
-            6: { sorter: false }
-        }
-    });
 })
 
 /************* student_edit *****************/
@@ -108,27 +122,26 @@ $(function() {
     $("#stu_info_show").ajaxSubmit(options);
     $("#stu_edit_tab").click(options);
     $("#stu_show_tab").click(options);
-});
 
-$(function() {
-    var options = {
-            data: { operat: 'edit' },
-            success: function(result) {
-                alert(result.d);
-            }
-       
-    };
     $('#stu_edit_form').validate({
-
         submitHandler: function(form) {	// 验证成功后会执行该方法
-            // ajax提交表单，发送请求
-            $(form).ajaxSubmit(options);
+            $(form).ajaxSubmit(function() {
+                $.ajax({
+                    type: "POST",
+                    contentType: "application/json",
+                    url: "student_edit.aspx/student_edit",
+                    data: "{sname:'" + $("#stu_sname_input").val() + "',sex:'" + $("#stu_sex_select").val()
+                     + "',institute:'" + $("#stu_institute_input").val() + "',major:'" + $("#stu_major_input").val() + "',sclass:'" + $("#stu_sclass_input").val()
+                      + "',tel:'" + $("#stu_tel_input").val() + "',email:'" + $("#stu_email_input").val() + "',eng:'" + $("#stu_eng_input").val()
+                       + "',honour:'" + $("#stu_honour_textarea").val() + "',intro:'" + $("#stu_intro_textarea").val() + "',remark:'" + $("#stu_remark_textarea").val() + "'}",
+                    dataType: "json",
+                    success: function(result) {
+                        alert(result.d);
+                    }
+                });
+            });
         }
     });
-   // $('#stu_edit_form').validate(function() {
-     //   $(this).ajaxSubmit(options);
-    //    return false;
-    //});
 
     $('#stu_del_btn').click(function() {
         $.ajax({
@@ -142,4 +155,5 @@ $(function() {
             }
         });
     });
+    
 });

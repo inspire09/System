@@ -137,6 +137,7 @@ $(function() {
                     dataType: "json",
                     success: function(result) {
                         alert(result.d);
+                        window.location.href = "student_index.aspx";
                     }
                 });
             });
@@ -152,8 +153,162 @@ $(function() {
             dataType: "json",
             success: function(result) {
                 alert(result.d);
+                window.location.href = "student_index.aspx";
             }
         });
     });
-    
+
+});
+
+/************* teacher_index *****************/
+$(function() {
+
+    $('#tea_add_form').validate({
+        submitHandler: function(form) {	// 验证成功后会执行该方法
+            $(form).ajaxSubmit(function() {
+                $.ajax({
+                    type: "POST",
+                    contentType: "application/json",
+                    url: "teacher_index.aspx/teacher_insert",
+                    data: "{tno:'" + $("#tno_input").val() + "',tname:'" + $("#tname_input").val() + "'}",
+                    dataType: "json",
+                    success: function(result) {
+                        $("#tno_input").val("");
+                        $("#tname_input").val("");
+                        alert("新增用户成功");
+                    }
+                });
+            });
+        }
+    });
+
+    $("#tea_add_tab").click(function() {
+        $("#SelectName").val("员工号");
+        $("#InputValue").val("");
+    });
+
+    //$("table").tablesorter();
+
+    var tea_index = function() {
+        $.ajax({
+            type: "POST",
+            contentType: "application/json",
+            url: "teacher_index.aspx/teacher_select",
+            data: "{selectName:'" + $("#SelectName").val() + "',selectValue:'" + $("#InputValue").val() + "'}",
+            dataType: "json",
+            success: function(result) {
+                var data = $.parseJSON(result.d);
+                var str = "";
+                $(data).each(function(i) {
+                    str = str + "<tr><td>" + data[i].tno + "</td>";
+                    str = str + "<td>" + data[i].tname + "</td>";
+                    str = str + "<td>" + data[i].sex + "</td>";
+                    str = str + "<td>" + data[i].room + "</td>";
+                    str = str + "<td>" + data[i].title + "</td>";
+                    str = str + "<td>" + data[i].institute + "</td>";
+                    str = str + "<td class='options'><ul class='inline'>";
+                    str = str + "<li><a href='teacher_edit.aspx?tno=" + data[i].tno + "&operat=show'>查看</a></li>";
+                    str = str + "<li><a href='teacher_edit.aspx?tno=" + data[i].tno + "&operat=edit'>编辑</a></li>";
+                    str = str + "<li><a href='teacher_edit.aspx?tno=" + data[i].tno + "&operat=del'>删除</a></li>";
+                    str = str + "</ul></td></tr>";
+                });
+                $("#tea_info_tbody").html(str);
+                //$("table").trigger("update");
+                //var sorting = [[0, 0]];
+                //$("table").trigger("sorton", [sorting]);
+            }
+        });
+    };
+    $("#tea_info_table").ajaxSubmit(tea_index);
+    $("#tea_info_tab").click(tea_index);
+    $('#tea_select_form').submit(function() {
+        $(this).ajaxSubmit(tea_index);
+        return false;
+    });
+
+})
+
+
+/************* teacher_edit *****************/
+$(function() {
+    var tea_show = function() {
+        $.ajax({
+            type: "POST",
+            contentType: "application/json",
+            url: "teacher_edit.aspx/teacher_info",
+            data: "{}",
+            dataType: "json",
+            success: function(result) {
+                var data = $.parseJSON(result.d);
+                $("#tea_tno_td").text(data.tno);
+                $("#tea_tname_td").text(data.tname);
+                $("#tea_sex_td").text(data.sex);
+                $("#tea_room_td").text(data.room);
+                $("#tea_tel_td").text(data.tel);
+                $("#tea_email_td").text(data.email);
+                $("#tea_title_td").text(data.title);
+                $("#tea_education_td").text(data.education);
+                $("#tea_course_td").text(data.course);
+                $("#tea_research_td").text(data.research);
+                $("#tea_article_td").text(data.article);
+                $("#tea_demand_td").text(data.demand);
+                $("#tea_institute_td").text(data.institute);
+
+                $("#tea_tno_input").val(data.tno);
+                $("#tea_tname_input").val(data.tname);
+                $("#tea_sex_select").val(data.sex);
+                $("#tea_room_input").val(data.room);
+                $("#tea_tel_input").val(data.tel);
+                $("#tea_email_input").val(data.email);
+                $("#tea_title_input").val(data.title);
+                $("#tea_education_input").val(data.education);
+                $("#tea_course_textarea").val(data.course);
+                $("#tea_research_textarea").val(data.research);
+                $("#tea_article_textarea").val(data.article);
+                $("#tea_demand_textarea").val(data.demand);
+                $("#tea_institute_input").val(data.institute);
+            }
+        });
+    };
+    $("#tea_info_show").ajaxSubmit(tea_show);
+    $("#tea_edit_tab").click(tea_show);
+    $("#tea_show_tab").click(tea_show);
+
+    $('#tea_edit_form').validate({
+        submitHandler: function(form) {	// 验证成功后会执行该方法
+            $(form).ajaxSubmit(function() {
+                $.ajax({
+                    type: "POST",
+                    contentType: "application/json",
+                    url: "teacher_edit.aspx/teacher_edit",
+                    data: "{tname:'" + $("#tea_tname_input").val() + "',sex:'" + $("#tea_sex_select").val()
+                     + "',room:'" + $("#tea_room_input").val() + "',tel:'" + $("#tea_tel_input").val()
+                     + "',email:'" + $("#tea_email_input").val() + "',title:'" + $("#tea_title_input").val() 
+                      + "',education:'" + $("#tea_education_input").val() + "',course:'" + $("#tea_course_textarea").val()
+                       + "',research:'" + $("#tea_research_textarea").val() + "',article:'" + $("#tea_article_textarea").val()
+                       + "',demand:'" + $("#tea_demand_textarea").val() + "',institute:'" + $("#tea_institute_input").val() + "'}",
+                    dataType: "json",
+                    success: function(result) {
+                        alert(result.d);
+                        window.location.href = "teacher_index.aspx";
+                    }
+                });
+            });
+        }
+    });
+
+    $('#tea_del_btn').click(function() {
+        $.ajax({
+            type: "POST",
+            contentType: "application/json",
+            url: "teacher_edit.aspx/teacher_del",
+            data: "{}",
+            dataType: "json",
+            success: function(result) {
+                alert(result.d);
+                window.location.href = "teacher_index.aspx";
+            }
+        });
+    });
+
 });

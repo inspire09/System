@@ -11,4 +11,9 @@ public partial class MasterPageBase : System.Web.UI.MasterPage
     {
 
     }
+    protected void LinkButtonLoginOut_Click(object sender, EventArgs e)
+    {
+        Session["userID"] = null;
+        Response.Redirect("../MDefault.aspx");
+    }
 }

@@ -3,7 +3,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
 
     
-    <ul class="breadcrumb">
+        <ul class="breadcrumb">
 			<li>
 			    <a href="#">Home</a> <span class="divider">/</span>
 			</li>
@@ -73,6 +73,9 @@
 				        </tbody>
 					</table>
 				</div>
+				<div align="center">
+			        <a class="btn btn-primary" href="student_index.aspx">返回</a>
+			    </div>
 			</div>
 			<div class="<%= editClass %>" id="edit">
           	    <form class="form-horizontal" id="stu_edit_form" method="post">
@@ -154,18 +157,18 @@
 			            </div>
 			            <div class="form-actions">
 			                <button type="submit" class="btn btn-primary" id="SubmitSave">保存</button>
-			                <button class="btn">取消</button>
+			                <a class="btn" href="student_index.aspx">取消</a>
 			            </div>
           		    </fieldset>
           	    </form>
           	</div>
-          	<div class="<%= delClass %>" id="del">
+          	<div class="<%= delClass %>" id="del" align="center">
           		<div class="alert alert-block alert-error fade in span10">
 		            <h4 class="alert-heading">删除</h4>
 		            <p>是否确定删除？</p>
 		            <p>
 		            	<a class="btn btn-danger" href="#" id="stu_del_btn">确定</a>
-		            	<a class="btn" href="#">取消</a>
+		            	<a class="btn" href="student_index.aspx">取消</a>
 		            </p>
 		        </div>
           	</div>

@@ -40,7 +40,7 @@
         <asp:LinkButton ID="LinkButton1" CssClass="btn btn-primary" runat="server" onclick="BtnSelect_Click"><i class="icon-search icon-white"></i> 查询</asp:LinkButton>
  		
 	</form>
-				
+	<!--			
 	<div id="college_select" class="tabbable">
 		<ul class="nav nav-tabs">
 			<li class="active"><a href="#college_0" data-toggle="tab">所有学院</a></li>
@@ -56,7 +56,7 @@
 	        <li><a href="#college_0" data-toggle="tab">艺术学院</a></li>			
 		</ul>
 	</div>
-	
+	-->
 	<div class="tab-content">
         <div id="college_0" class="tab-pane fade active in">       						
             <asp:SqlDataSource ID="SqlDataSource1" runat="server" 
@@ -76,7 +76,7 @@
                                 <p><%# Eval("title") %><span class="pull-right"><%# Eval("education") %></span></p>
                                 <p><%# Eval("research") %></p>
                                 <p><%# Eval("email") %></p>
-                                <p><a href="#" rel="popover" title="概况" data-content="教研室:<%# Eval("room") %><br/>电话:<%# Eval("tel") %><br/>主教课程:<%# Eval("course") %><br/>论文情况:<%# Eval("article") %>">详细资料</a></p>
+                                <p><a href="#" rel="popover" title="概况" data-content="教研室:<%# Eval("room") %><br/>电话:<%# Eval("tel") %><br/>主教课程:<%# Eval("course") %><br/>论文情况:<%# Eval("article") %><br/>对学生要求:<%# Eval("demand") %>">详细资料</a></p>
                                 <div class='confirm clearfix'>
                                     <p class='pull-left'>
                                     <span class='badge badge-warning'>3</span> / <span class='badge badge-success'>8</span>
@@ -87,9 +87,9 @@
                                         </button>
                                         <ul class='dropdown-menu'>
                                             <li><input type="hidden" id="tno_input" value="<%# Eval("tno") %>" /></li>
-                                            <li><a href='#' data-choice="1">第一志愿</a></li>
-                                            <li><a href='#' data-choice="2">第二志愿</a></li>
-                                            <li><a href='#' data-choice="3">第三志愿</a></li>
+                                            <li><a href='#' data-choice="0">第一志愿</a></li>
+                                            <li><a href='#' data-choice="1">第二志愿</a></li>
+                                            <li><a href='#' data-choice="2">第三志愿</a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -121,9 +121,9 @@
                                         </button>
                                         <ul class='dropdown-menu'>
                                             <li><input type="hidden" id="tno_input" value="<%# Eval("tno") %>" /></li>
-                                            <li><a href='#' data-choice="1">第一志愿</a></li>
-                                            <li><a href='#' data-choice="2">第二志愿</a></li>
-                                            <li><a href='#' data-choice="3">第三志愿</a></li>
+                                            <li><a href='#' data-choice="0">第一志愿</a></li>
+                                            <li><a href='#' data-choice="1">第二志愿</a></li>
+                                            <li><a href='#' data-choice="2">第三志愿</a></li>
                                         </ul>
                                     </div>
                                 </div>

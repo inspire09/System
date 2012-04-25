@@ -7,8 +7,6 @@ $(function(){
 	var $login_form = $('form#login_form');
 	var submit_options = {
 		success: function(response) {	// callback
-			// 判断登录是否成功
-			// TODO
 			window.location.href = "student_index.html";
 		},
 		error: function(response) {	// callback  error: 404,500..

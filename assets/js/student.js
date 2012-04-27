@@ -72,4 +72,110 @@
         //$.post(url, params, function(){});
     });
 
+
+    /*  照片裁剪 */
+    // 照片大小
+    var avatar_width = 225,
+        avatar_height = 300;
+    // Create variables (in this scope) to hold the API and image size
+    var jcrop_api, boundx, boundy;
+
+    // 裁剪后的效果图预览
+    var updatePreview = function(c) {
+        if (parseInt(c.w) > 0) {
+            var rx = avatar_width / c.w;
+            var ry = avatar_height / c.h;
+
+            $('.avatar_preview img').css({
+                width: Math.round(rx * boundx) + 'px',
+                height: Math.round(ry * boundy) + 'px',
+                marginLeft: '-' + Math.round(rx * c.x) + 'px',
+                marginTop: '-' + Math.round(ry * c.y) + 'px'
+            });
+        }
+    };
+
+    var $crop_container = $('#my_avatar');
+
+    // 渲染被裁剪的(上传)图片
+    var regCropAvatar = function() {
+        $('#my_avatar img').Jcrop({
+            minSize: [10, 10], 	// 裁剪的最小宽度、高度
+            maxSize: [avatar_width, avatar_height], // 裁剪的最大宽度、高度
+            setSelect: [0, 0, avatar_width, avatar_height], // 设置 默认选中区域的左上角、右下角坐标
+            onSelect: updatePreview,
+            onChange: updatePreview,
+            onRelease: function() { },
+            aspectRatio: 0.75	// 等比缩放
+        }, function() { // callback
+            // Use the API to get the real image size
+            var bounds = this.getBounds();
+            boundx = bounds[0];
+            boundy = bounds[1];
+            // Store the API in the jcrop_api variable
+            jcrop_api = this;
+        });
+    };
+
+    /* 照片上传前预览 */
+    var $input_file = $('form#upload_avatar input:file');
+    $input_file.bind('change', function(e) {
+        e = e.originalEvent;
+        e.preventDefault();
+        window.loadImage(
+			(e.dataTransfer || e.target).files[0],
+			function(img) { // callback
+			    $crop_container.children().replaceWith(img);
+			    $('.avatar_preview').children().replaceWith($.clone(img));
+			    regCropAvatar();
+			},
+			{
+			    maxWidth: $crop_container.width(),
+			    maxHeight: $crop_container.height()
+			}
+		);
+    });
+
+    // 默认照片/原照片 裁剪渲染
+    regCropAvatar();
+
+    // 保存头像按钮事件
+    $('#upload_image_form').submit(function() {
+
+        if (!$.trim($('#image_file', $(this)).val())) {
+            showMsg("error", "请选择一张本地照片");
+            return false;
+        }
+
+        var img = $('#my_avatar img')[0];
+        var scale = Math.min(
+            $crop_container.width() / img.naturalWidth,
+            $crop_container.height() / img.naturalHeight
+        );
+        if (scale > 1) scale = 1;   // 若大于1表示原始图片没有缩小
+
+        var c = jcrop_api.tellSelect();
+        var rx = avatar_width / c.w;
+        var ry = avatar_height / c.h;
+        var rscale = parseFloat((scale * rx).toFixed(6));   // 小数点保留6位有效数
+
+        $(this).ajaxSubmit({
+            url: 'upload_avatar',
+            data: {
+                origin_width: img.naturalWidth,
+                origin_height: img.naturalHeight,
+                to_width: avatar_width,
+                to_height: avatar_height,
+                scale: rscale,          // 原始图片缩放的实际倍数,因为是等比缩放，所以x,y的缩放倍数是一样的
+                x: c.x,                 // 选中区域的左上角X坐标, 请以该数据为依据
+                y: c.y                  // 选中区域的左上角Y坐标, 请以该数据为依据
+            },
+            success: function(response) { // callback
+                alert('success');
+            }
+        });
+
+        return false;
+    });
+
 })

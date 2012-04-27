@@ -10,9 +10,9 @@
     <div class="well sidebar-nav">
         <ul class="nav nav-list">
             <li class="nav-header">帐号设置</li>
-            <li><a href="#">个人信息</a></li>
+            <li><a href="TInfo.aspx">个人信息</a></li>
             <li><a href="#">上传照片</a></li>
-            <li><a href="#">修改密码</a></li>
+            <li><a href="TPwd.aspx">修改密码</a></li>
             <li class="nav-header">选取学生</li>
             <li><a href="Tutor.aspx">选取</a></li>
             <li><a href="MyTutor.aspx">查看</a></li>

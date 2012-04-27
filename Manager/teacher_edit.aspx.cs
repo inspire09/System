@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;// Dictionary<,> 键值对集合所需
+using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -8,9 +8,9 @@ using System.Web.UI.WebControls;
 using System.Web.Services;
 using System.Web.Script.Serialization;  //JavaScriptSerializer 类所需
 
-public partial class Manager_student_edit : System.Web.UI.Page
+public partial class Manager_teacher_edit : System.Web.UI.Page
 {
-    private static string sno="";
+    private static string tno = "";
     public string showClass = "";
     public string editClass = "";
     public string delClass = "";
@@ -22,16 +22,16 @@ public partial class Manager_student_edit : System.Web.UI.Page
     {
         if (!IsPostBack)
         {
-            sno = Request.QueryString["sno"].ToString();
+            tno = Request.QueryString["tno"].ToString();
             string operat = Request.QueryString["operat"].ToString();
-            
+
             if (operat == "show")
             {
                 showClass = "tab-pane fade active in";
                 editClass = "tab-pane fade";
                 delClass = "tab-pane fade";
                 showLi = "active";
-                
+
             }
             else if (operat == "edit")
             {
@@ -46,45 +46,48 @@ public partial class Manager_student_edit : System.Web.UI.Page
                 editClass = "tab-pane fade";
                 delClass = "tab-pane fade active in";
                 delLi = "active";
-            }       
+            }
         }
     }
 
     [WebMethod]
-    public static string student_info()
+    public static string teacher_info()
     {
         JavaScriptSerializer jss = new JavaScriptSerializer();
-        stu_Manage stuManage = new stu_Manage();
-        return jss.Serialize(stuManage.stu_Info(sno));
+        tea_Manage teaManage = new tea_Manage();
+        return jss.Serialize(teaManage.tea_Info(tno));
         //return string.Format("欢迎你{0} {1}", sno, sname);
     }
 
     [WebMethod]
-    public static string student_edit(string sname,string sex,string institute,string major,
-        string sclass,string tel,string email,string eng, string honour,string intro,string remark)
+    public static string teacher_edit(string tname, string sex, string room, string tel, string email, string title,
+        string education, string course, string research, string article, string demand, string institute)
     {
-        student stu = new student();
-        stu.Sno = sno;
-        stu.Sname = sname;
-        stu.Sex = sex;
-        stu.Institute = institute;
-        stu.Major = major;
-        stu.Sclass = sclass;
-        stu.Tel = tel;
-        stu.Email = email;
-        stu.EnglishLevel = eng;
-        stu.Honour = honour;
-        stu.Intro = intro;
-        stu.Remark = remark;
-        stu_Manage stuManage = new stu_Manage();
-        return string.Format(stuManage.stu_Update(stu));
-        
+        teacher tea = new teacher();
+        tea.tno = tno;
+        tea.tname = tname;
+        tea.sex = sex;
+        tea.room = room;
+        tea.tel = tel;
+        tea.email = email;
+        tea.title = title;
+        tea.education = education;
+        tea.course = course;
+        tea.research = research;
+        tea.article = article;
+        tea.demand = demand;
+        tea.institute = institute;
+        tea_Manage teaManage = new tea_Manage();
+        return string.Format(teaManage.tea_Update(tea));
+
     }
 
     [WebMethod]
-    public static string student_del()
+    public static string teacher_del()
     {
-        stu_Manage stuManage = new stu_Manage();
-        return string.Format(stuManage.stu_Delete(sno));
+        tea_Manage teaManage = new tea_Manage();
+        return string.Format(teaManage.tea_Delete(tno));
     }
+
+
 }

@@ -10,12 +10,12 @@
     <div class="well sidebar-nav">
         <ul class="nav nav-list">
             <li class="nav-header">帐号设置</li>
-            <li class="active"><a href="SInfo.aspx">个人信息</a></li>
+            <li><a href="SInfo.aspx">个人信息</a></li>
             <li><a href="SAvatar.aspx">修改头像</a></li>
             <li><a href="SPwd.aspx">修改密码</a></li>
             <li class="nav-header">选配导师</li>
-            <li><a href="#">填写志愿</a></li>
-            <li><a href="#">查看志愿</a></li>
+            <li><a href="volunteer.aspx">填写志愿</a></li>
+            <li><a href="my_vol.aspx">查看志愿</a></li>
             <li class="nav-header">站内消息</li>
             <li><a href="#"><span class="label label-important" style="padding: 6px 8px; line-height: 30px;">
                 发送消息</span> </a></li>

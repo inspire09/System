@@ -1,15 +1,15 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+
+using System.Web.Services;
+using System.Web.Script.Serialization;  //JavaScriptSerializer 类所需
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Web;
-using System.Web.Security;
-using System.Web.UI;
-using System.Web.UI.HtmlControls;
-using System.Web.UI.WebControls;
-using System.Web.UI.WebControls.WebParts;
-using System.Xml.Linq;
 
 public partial class _Default : System.Web.UI.Page 
 {
@@ -27,11 +27,11 @@ public partial class _Default : System.Web.UI.Page
         string myStr = ConfigurationManager.ConnectionStrings["ChoiceSystem"].ConnectionString;
         SqlConnection myConn = new SqlConnection(myStr);
         myConn.Open();
-        SqlCommand myCmd = new SqlCommand("userLogin", myConn);
-        myCmd.CommandType = CommandType.StoredProcedure;
-        myCmd.Parameters.Add("@userID", SqlDbType.Char, 20).Value = userID;
-        myCmd.Parameters.Add("@userPass", SqlDbType.Char, 20).Value = userPass;
-        myCmd.Parameters.Add("@privilege", SqlDbType.Char, 20).Value = privilege;
+        string sqlStr = "select count(*) from userTable where userID=@userID and userPass=@userPass and privilege=@privilege";
+        SqlCommand myCmd = new SqlCommand(sqlStr, myConn);
+        myCmd.Parameters.AddWithValue("@userID", userID);
+        myCmd.Parameters.AddWithValue("@userPass", userPass);
+        myCmd.Parameters.AddWithValue("@privilege", privilege);
         int result = (int)myCmd.ExecuteScalar();
         myConn.Close();
         if (result > 0)
@@ -40,13 +40,14 @@ public partial class _Default : System.Web.UI.Page
             if(privilege=="学生")
                 Response.Redirect("Student/SDefault.aspx");
             else if(privilege=="教师")
-                Response.Redirect("Student/SDefault.aspx");
+                Response.Redirect("Teacher/TDefault.aspx");
             else if (privilege == "管理员")
-                Response.Redirect("Student/SDefault.aspx");
+                Response.Redirect("Manager/MDefault.aspx");
         }
         else
         {
             Response.Write("<script>alert('用户名或密码错误！')</script>");
         }   
     }
+
 }

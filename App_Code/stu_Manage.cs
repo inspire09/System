@@ -26,9 +26,9 @@ public class stu_Manage
         return myConn;
     }
 
-    public student stu_Info(string sno)
+    public Dictionary<string, string> stu_Info(string sno)
     {
-        student stu = new student();
+        Dictionary<string, string> drow = new Dictionary<string, string>(); 
         SqlConnection myConn = GetConnection();
         myConn.Open();
         SqlCommand myCmd = new SqlCommand("stuInfo", myConn);
@@ -37,42 +37,42 @@ public class stu_Manage
         SqlDataReader reader = myCmd.ExecuteReader();
         if (reader.Read())
         {
-            stu.Sno = sno;
-            stu.Sname = reader["sname"].ToString();
-            stu.Sex = reader["sex"].ToString();
-            stu.Institute = reader["institute"].ToString();
-            stu.Major = reader["major"].ToString();
-            stu.Sclass = reader["sclass"].ToString();
-            stu.Tel = reader["tel"].ToString();
-            stu.Email = reader["email"].ToString();
-            stu.EnglishLevel = reader["englishLevel"].ToString();
-            stu.Honour = reader["honour"].ToString();
-            stu.Intro = reader["intro"].ToString();
-            stu.Remark = reader["remark"].ToString();
-        }   
+            drow.Add("sno", sno);
+            drow.Add("sname", reader["sname"].ToString());
+            drow.Add("sex", reader["sex"].ToString());
+            drow.Add("institute", reader["institute"].ToString());
+            drow.Add("major", reader["major"].ToString());
+            drow.Add("sclass", reader["sclass"].ToString());
+            drow.Add("tel", reader["tel"].ToString());
+            drow.Add("email", reader["email"].ToString());
+            drow.Add("eng", reader["englishLevel"].ToString());
+            drow.Add("honour", reader["honour"].ToString());
+            drow.Add("intro", reader["intro"].ToString());
+            drow.Add("remark", reader["remark"].ToString());
+            
+        }
+        reader.Close();
         myConn.Close();
-        return stu;
+        return drow;
     }
 
-    public student stu_Insert(string sno, string sname)
+    public string stu_Insert(string sno, string sname)
     {
-        student stu = new student();
         SqlConnection myConn = GetConnection();
         myConn.Open();
         SqlCommand myCmd = new SqlCommand("stuInsert", myConn);
         myCmd.CommandType = CommandType.StoredProcedure;
         myCmd.Parameters.AddWithValue("@sno", sno);
         myCmd.Parameters.AddWithValue("@sname", sname);
-        if (myCmd.ExecuteNonQuery() > 0)
-        {
-            stu.Sno = sno;
-            stu.Sname = sname;
-        }
+        int i = myCmd.ExecuteNonQuery();
         myConn.Close();
-        return stu;
+        if (i > 0)
+            return "yes";
+        else
+            return "no";
     }
 
-    public bool stu_Update(student stu)
+    public string stu_Update(student stu)
     {
         SqlConnection myConn = GetConnection();
         myConn.Open();
@@ -87,18 +87,18 @@ public class stu_Manage
         myCmd.Parameters.AddWithValue("@tel", stu.Tel);
         myCmd.Parameters.AddWithValue("@email", stu.Email);
         myCmd.Parameters.AddWithValue("@englishLevel", stu.EnglishLevel);
-        myCmd.Parameters.AddWithValue("@Honour", stu.Honour);
-        myCmd.Parameters.AddWithValue("@Intro", stu.Intro);
-        myCmd.Parameters.AddWithValue("@Remark", stu.Remark);
+        myCmd.Parameters.AddWithValue("@honour", stu.Honour);
+        myCmd.Parameters.AddWithValue("@intro", stu.Intro);
+        myCmd.Parameters.AddWithValue("@remark", stu.Remark);
         int i = myCmd.ExecuteNonQuery();
         myConn.Close();
         if (i > 0)
-            return true;
+            return string.Format("{0} {1} 修改信息成功", stu.Sno.Trim(), stu.Sname.Trim());
         else
-            return false;
+            return string.Format("{0} {1} 修改信息失败", stu.Sno.Trim(), stu.Sname.Trim());
     }
 
-    public bool stu_Delete(string sno)
+    public string stu_Delete(string sno)
     {
         SqlConnection myConn = GetConnection();
         myConn.Open();
@@ -108,14 +108,14 @@ public class stu_Manage
         int i = myCmd.ExecuteNonQuery();
         myConn.Close();
         if (i > 0)
-            return true;
+            return "删除成功";
         else
-            return false;
+            return "删除失败";
     }
 
-    public List<student> stu_select(string selectName, string selectValue)
+    public List<Dictionary<string, string>> stu_select(string selectName, string selectValue)
     {
-        List<student> stuList = new List<student>();
+        List<Dictionary<string, string>> drowList = new List<Dictionary<string, string>>();
         SqlConnection myConn = GetConnection();
         myConn.Open();
         string myStr = "select sno,sname,sex,institute,major,sclass from studentInfo";
@@ -133,17 +133,18 @@ public class stu_Manage
         SqlDataReader reader = myCmd.ExecuteReader();
         while (reader.Read())
         {
-            student stu = new student();
-            stu.Sno = reader["sno"].ToString();
-            stu.Sname = reader["sname"].ToString();
-            stu.Sex = reader["sex"].ToString();
-            stu.Institute = reader["institute"].ToString();
-            stu.Major = reader["major"].ToString();
-            stu.Sclass = reader["sclass"].ToString();
-            stuList.Add(stu);
+            Dictionary<string, string> drow = new Dictionary<string, string>();
+            drow.Add("sno", reader["sno"].ToString());
+            drow.Add("sname", reader["sname"].ToString());
+            drow.Add("sex", reader["sex"].ToString());
+            drow.Add("institute", reader["institute"].ToString());
+            drow.Add("major", reader["major"].ToString());
+            drow.Add("sclass", reader["sclass"].ToString());
+            drowList.Add(drow);
         }
+        reader.Close();
         myConn.Close();
-        return stuList;
+        return drowList;
     }
 
 }

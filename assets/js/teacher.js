@@ -1,8 +1,60 @@
 ﻿
-/**************  Tutor.aspx  **************/
+
 
 $(function() {
-    
+
+    /**************  TInfo.aspx  **************/
+
+    $("#tea_edit_form").ajaxSubmit(function() {
+        $.ajax({
+            type: "POST",
+            contentType: "application/json",
+            url: "TInfo.aspx/teacher_info",
+            data: "{}",
+            dataType: "json",
+            success: function(result) {
+                var data = $.parseJSON(result.d);
+                $("#tea_tno_input").val(data.tno);
+                $("#tea_tname_input").val(data.tname);
+                $("#tea_sex_select").val(data.sex);
+                $("#tea_room_input").val(data.room);
+                $("#tea_tel_input").val(data.tel);
+                $("#tea_email_input").val(data.email);
+                $("#tea_title_input").val(data.title);
+                $("#tea_education_input").val(data.education);
+                $("#tea_course_textarea").val(data.course);
+                $("#tea_research_textarea").val(data.research);
+                $("#tea_article_textarea").val(data.article);
+                $("#tea_demand_textarea").val(data.demand);
+                $("#tea_institute_input").val(data.institute);
+            }
+        });
+    });
+
+    $('#tea_edit_form').validate({
+        submitHandler: function(form) {	// 验证成功后会执行该方法
+            $(form).ajaxSubmit(function() {
+                $.ajax({
+                    type: "POST",
+                    contentType: "application/json",
+                    url: "TInfo.aspx/teacher_edit",
+                    data: "{tname:'" + $("#tea_tname_input").val() + "',sex:'" + $("#tea_sex_select").val()
+                     + "',room:'" + $("#tea_room_input").val() + "',tel:'" + $("#tea_tel_input").val()
+                     + "',email:'" + $("#tea_email_input").val() + "',title:'" + $("#tea_title_input").val()
+                      + "',education:'" + $("#tea_education_input").val() + "',course:'" + $("#tea_course_textarea").val()
+                       + "',research:'" + $("#tea_research_textarea").val() + "',article:'" + $("#tea_article_textarea").val()
+                       + "',demand:'" + $("#tea_demand_textarea").val() + "',institute:'" + $("#tea_institute_input").val() + "'}",
+                    dataType: "json",
+                    success: function(result) {
+                        alert(result.d);
+                        //window.location.href = "teacher_index.aspx";
+                    }
+                });
+            });
+        }
+    });
+    /**************  Tutor.aspx  **************/
+
     //已选学生数，可选学生数
     $("#stu_count").ajaxSubmit(function() {
         $.ajax({
@@ -20,7 +72,7 @@ $(function() {
     });
 
     //$("table").tablesorter();
-    
+
     //PageLoad  table
     var options = function() {
         $.ajax({
@@ -60,7 +112,7 @@ $(function() {
         $(this).ajaxSubmit(options);
         return false;
     });
-    
+
     //‘选定’按钮，选学生
     $("#stu_info_table button[class='btn btn-primary']").live('click', function() {
         var self = $(this);
@@ -82,7 +134,7 @@ $(function() {
             }
         })
     })
-    
+
     //‘删除/取消’按钮，取消已选学生
     $("#stu_info_table button[class='btn']").live('click', function() {
         var self = $(this);

@@ -253,7 +253,8 @@
         var c = jcrop_api.tellSelect();
         var rx = avatar_width / c.w;
         var ry = avatar_height / c.h;
-        var rscale = parseFloat((scale * rx).toFixed(6));   // 小数点保留6位有效数
+        var rscalex = parseFloat((scale * rx).toFixed(6));   // 小数点保留6位有效数
+        var rscaley = parseFloat((scale * ry).toFixed(6));
 
         $(this).ajaxSubmit({
             url: 'upload_avatar',
@@ -262,9 +263,10 @@
                 origin_height: img.naturalHeight,
                 to_width: avatar_width,
                 to_height: avatar_height,
-                scale: rscale,          // 原始图片缩放的实际倍数,因为是等比缩放，所以x,y的缩放倍数是一样的
-                x: c.x,                 // 选中区域的左上角X坐标, 请以该数据为依据
-                y: c.y                  // 选中区域的左上角Y坐标, 请以该数据为依据
+                scalex: rscalex,            // 原始图片缩放的实际倍数,因为是等比缩放，所以x,y的缩放倍数是一样的
+                scaley: rscaley,
+                x: Math.round(rx * c.x),    // 选中区域的左上角X坐标, 请以该数据为依据
+                y: Math.round(ry * c.y)     // 选中区域的左上角Y坐标, 请以该数据为依据
             },
             success: function(response) { // callback
                 alert('success');

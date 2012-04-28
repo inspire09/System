@@ -26,6 +26,11 @@
                 </div>
             </div>
         </div>
+        <div class="span3">
+            <div class="avatar_preview2" style="width: 225px; height: 300px; overflow: hidden;">
+                <img src="../assets/sample/pool.jpg" alt="" />
+            </div>
+        </div>
     </div>
     <div class="form-actions">
         <button id="upload_image_btn" type="submit" class="btn btn-primary">保存</button>

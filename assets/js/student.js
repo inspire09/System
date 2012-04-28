@@ -214,7 +214,7 @@
     };
 
     /* 照片上传前预览 */
-    var $input_file = $('form#upload_avatar input:file');
+    var $input_file = $('form#upload_image_form input:file');
     $input_file.bind('change', function(e) {
         e = e.originalEvent;
         e.preventDefault();

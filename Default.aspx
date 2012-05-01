@@ -12,13 +12,13 @@
     <link href="assets/css/login.css" rel="stylesheet" type="text/css" />
     
     <!-- Le javascript -->
-    <script src="assets/js/jquery.js" type="text/javascript"></script>
-    <script src="assets/js/jquery.patch.js" type="text/javascript"></script>
-    <script src="assets/js/jquery.form.js" type="text/javascript"></script>
-    <script src="assets/js/jquery.metadata.js" type="text/javascript"></script>
-    <script src="assets/js/jquery.validate.js" type="text/javascript"></script>
-    <script src="assets/js/jquery.validate.messages_cn.js" type="text/javascript"></script>  
-    <script src="assets/js/bootstrap.js" type="text/javascript"></script>
+    <script src="assets/js/lib/jquery.js" type="text/javascript"></script>
+    <script src="assets/js/lib/jquery.patch.js" type="text/javascript"></script>
+    <script src="assets/js/lib/jquery.form.js" type="text/javascript"></script>
+    <script src="assets/js/lib/jquery.metadata.js" type="text/javascript"></script>    
+    <script src="assets/js/lib/jquery.validate.js" type="text/javascript"></script>
+    <script src="assets/js/lib/jquery.validate.messages_cn.js" type="text/javascript"></script>
+    <script src="assets/js/lib/bootstrap.js" type="text/javascript"></script>
     <script src="assets/js/login.js" type="text/javascript"></script>
     
 </head>

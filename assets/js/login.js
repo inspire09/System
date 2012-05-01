@@ -23,7 +23,7 @@ $(function(){
 		errorContainer: "#messageBox1, #messageBox2",*/
 		submitHandler : function(form) {	// 验证成功后会执行该方法
 			// ajax提交表单，发送请求
-			$(form).ajaxSubmit(submit_options);
+			$(form).submit();
 		}
 	});
 	

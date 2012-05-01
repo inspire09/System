@@ -24,6 +24,9 @@ function showMsg(){
 		default:
 			return false;
 	}
+
+	$('#message').children().remove();
+	
 	var html = "<div class='alert " + type + " fade in'>" + 
 								"<a class='close' data-dismiss='alert'>&times;</a>" + 
 								"<strong>" + title + " </strong>" + content + 
@@ -37,6 +40,7 @@ function showMsg(){
 		}
 		$container.prepend($show_div);
 	}
-	
-	$show_div.prepend(html);
+	var $html = $(html).hide();
+	$show_div.prepend($html);
+	$html.fadeIn(200);
 }

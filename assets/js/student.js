@@ -168,7 +168,7 @@
     })
 
     /**************  SAvatar.aspx  **************/
-    
+
     /*  照片裁剪 */
     // 照片大小
     var avatar_width = 225,
@@ -176,9 +176,20 @@
     // Create variables (in this scope) to hold the API and image size
     var jcrop_api, boundx, boundy;
 
+    var updateJcropAPI = function(api) {
+        // Use the API to get the real image size
+        api = api || this;
+        var bounds = api.getBounds();
+        boundx = bounds[0];
+        boundy = bounds[1];
+        // Store the API in the jcrop_api variable
+        jcrop_api = api;
+        console.log("updateJcropAPI. boundx: " + boundx + ", boundy: " + boundy);
+    };
     // 裁剪后的效果图预览
     var updatePreview = function(c) {
         if (parseInt(c.w) > 0) {
+            console.log("updatePreview callback. boundx: " + boundx + ", boundy: " + boundy);
             var rx = avatar_width / c.w;
             var ry = avatar_height / c.h;
 
@@ -198,20 +209,23 @@
         $('#my_avatar img').Jcrop({
             minSize: [10, 10], 	// 裁剪的最小宽度、高度
             maxSize: [avatar_width, avatar_height], // 裁剪的最大宽度、高度
-            setSelect: [0, 0, avatar_width, avatar_height], // 设置 默认选中区域的左上角、右下角坐标
+            setSelect: [150, 50, avatar_width, avatar_height], // 设置 默认选中区域的左上角、右下角坐标
+            bgColor: 'white',
+            bgOpacity: .3,
             onSelect: updatePreview,
             onChange: updatePreview,
             onRelease: function() { },
             aspectRatio: 0.75	// 等比缩放
-        }, function() { // callback
-            // Use the API to get the real image size
-            var bounds = this.getBounds();
-            boundx = bounds[0];
-            boundy = bounds[1];
-            // Store the API in the jcrop_api variable
-            jcrop_api = this;
-        });
+        }, updateJcropAPI);
     };
+
+    var changeImage = function(img) {
+        jcrop_api.setImage(img.src, function() { // change image callback
+            $('.avatar_preview').children().replaceWith($.clone(img));
+            updateJcropAPI(this);
+            this.animateTo([0, 0, avatar_width, avatar_height]);
+        });
+    }
 
     /* 照片上传前预览 */
     var $input_file = $('form#upload_image_form input:file');
@@ -219,12 +233,7 @@
         e = e.originalEvent;
         e.preventDefault();
         window.loadImage(
-			(e.dataTransfer || e.target).files[0],
-			function(img) { // callback
-			    $crop_container.children().replaceWith(img);
-			    $('.avatar_preview').children().replaceWith($.clone(img));
-			    regCropAvatar();
-			},
+			(e.dataTransfer || e.target).files[0], changeImage,
 			{
 			    maxWidth: $crop_container.width(),
 			    maxHeight: $crop_container.height()

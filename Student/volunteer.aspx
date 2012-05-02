@@ -69,7 +69,7 @@
                             <img src="../assets/img/teacher/<%# Eval("photo") %>.jpg" />
                             <div class="favorite clearfix">
                                 <a class="btn btn-danger"><i class="icon-heart icon-white"></i> 赞<span>(18)</span></a>
-                                <a href="#" class="btn btn-success pull-right"><i class="icon-envelope icon-white"></i> 私信</a>
+                                <a href="write.aspx?receiverID=<%# Eval("tno") %>" class="btn btn-success pull-right"><i class="icon-envelope icon-white"></i> 私信</a>
                             </div>
                             <div class="caption">
                                 <h4><%# Eval("tname") %></h4>
@@ -103,7 +103,7 @@
                             <img src="../assets/img/teacher/<%# Eval("photo") %>.jpg" />
                             <div class="favorite clearfix">
                                 <a class="btn btn-danger"><i class="icon-heart icon-white"></i> 赞<span>(18)</span></a>
-                                <a href="#" class="btn btn-success pull-right"><i class="icon-envelope icon-white"></i> 私信</a>
+                                <a href="write.aspx?receiverID=<%# Eval("tno") %>" class="btn btn-success pull-right"><i class="icon-envelope icon-white"></i> 私信</a>
                             </div>
                             <div class="caption">
                                 <h4><%# Eval("tname") %></h4>

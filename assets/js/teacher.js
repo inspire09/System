@@ -180,7 +180,7 @@ $(function() {
                     str = str + "<td>" + data[i].major + "</td>";
                     str = str + "<td><a href='#' rel='popover' title='详细资料' data-content='" + content + "'>详细资料</a></td>";
                     str = str + "<td class='options'><button class='btn'>删除</button>";
-                    str = str + "</td></tr>";
+                    str = str + "<a href='write.aspx?receiverID=" + data[i].sno + "' class='btn btn-success'>私信</a></td></tr>";
                 });
                 $("#mytutor_tbody").html(str);
                 // 初始化：详细资料 浮出框
@@ -307,11 +307,6 @@ $(function() {
         var rscaley = parseFloat((scale * ry).toFixed(6));
 
         /*$(this).ajaxSubmit({
-            url: 'SAvatar.aspx/upload_avatar',
-            data: "{origin_width:'" + img.naturalWidth + "',origin_height:'" + img.naturalHeight
-                + "',to_width:'" + avatar_width + "',to_height:'" + avatar_height
-                + "',scalex:'" + rscalex + "',scaley:'" + rscaley
-                + "',x:'" + Math.round(rx * c.x) + "',y:'" + Math.round(ry * c.y) + "'}",
             //scalex: rscalex,            // 原始图片缩放的实际倍数,因为是等比缩放，所以x,y的缩放倍数是一样的
             //scaley: rscaley,
             //x: Math.round(rx * c.x),    // 选中区域的左上角X坐标, 请以该数据为依据
@@ -341,6 +336,25 @@ $(function() {
         return false;
     });
 
-
+    /**************  write.aspx  **************/
+    
+    $('#tea_write_form').validate({
+        submitHandler: function(form) {	// 验证成功后会执行该方法
+            $(form).ajaxSubmit(function() {
+                $.ajax({
+                    type: "POST",
+                    contentType: "application/json",
+                    url: "write.aspx/write",
+                    data: "{receiver:'" + $("#tea_receiver_input").val() + "',topic:'" + $("#tea_topic_input").val()
+                        + "',content:'" + $("#tea_content_textarea").val() + "'}",
+                    dataType: "json",
+                    success: function(result) {
+                        alert(result.d);
+                        window.location.href = "TDefault.aspx";
+                    }
+                });
+            });
+        }
+    });
 
 })

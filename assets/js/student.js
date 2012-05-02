@@ -167,6 +167,23 @@
         })
     })
 
-    
+    $('#stu_write_form').validate({
+        submitHandler: function(form) {	// 验证成功后会执行该方法
+            $(form).ajaxSubmit(function() {
+                $.ajax({
+                    type: "POST",
+                    contentType: "application/json",
+                    url: "write.aspx/write",
+                    data: "{receiver:'" + $("#stu_receiver_input").val() + "',topic:'" + $("#stu_topic_input").val() 
+                        + "',content:'" + $("#stu_content_textarea").val() + "'}",
+                    dataType: "json",
+                    success: function(result) {
+                        alert(result.d);
+                        window.location.href = "SDefault.aspx";
+                    }
+                });
+            });
+        }
+    });
 
 })

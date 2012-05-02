@@ -306,26 +306,41 @@ $(function() {
         var rscalex = parseFloat((scale * rx).toFixed(6));   // 小数点保留6位有效数
         var rscaley = parseFloat((scale * ry).toFixed(6));
 
-        $(this).ajaxSubmit({
-            url: 'upload_avatar',
-            data: {
-                origin_width: img.naturalWidth,
-                origin_height: img.naturalHeight,
-                to_width: avatar_width,
-                to_height: avatar_height,
-                scalex: rscalex,            // 原始图片缩放的实际倍数,因为是等比缩放，所以x,y的缩放倍数是一样的
-                scaley: rscaley,
-                x: Math.round(rx * c.x),    // 选中区域的左上角X坐标, 请以该数据为依据
-                y: Math.round(ry * c.y)     // 选中区域的左上角Y坐标, 请以该数据为依据
-            },
+        /*$(this).ajaxSubmit({
+            url: 'SAvatar.aspx/upload_avatar',
+            data: "{origin_width:'" + img.naturalWidth + "',origin_height:'" + img.naturalHeight
+                + "',to_width:'" + avatar_width + "',to_height:'" + avatar_height
+                + "',scalex:'" + rscalex + "',scaley:'" + rscaley
+                + "',x:'" + Math.round(rx * c.x) + "',y:'" + Math.round(ry * c.y) + "'}",
+            //scalex: rscalex,            // 原始图片缩放的实际倍数,因为是等比缩放，所以x,y的缩放倍数是一样的
+            //scaley: rscaley,
+            //x: Math.round(rx * c.x),    // 选中区域的左上角X坐标, 请以该数据为依据
+            //y: Math.round(ry * c.y)     // 选中区域的左上角Y坐标, 请以该数据为依据
+            //},
             success: function(response) { // callback
                 alert('success');
             }
+        });*/
+        $(this).ajaxSubmit(function() {
+            $.ajax({
+                type: "POST",
+                contentType: "application/json",
+                url: "SAvatar.aspx/upload_avatar",
+                data: "{origin_width:'" + img.naturalWidth + "',origin_height:'" + img.naturalHeight
+                    + "',to_width:'" + avatar_width + "',to_height:'" + avatar_height
+                    + "',scalex:'" + rscalex + "',scaley:'" + rscaley
+                    + "',x:'" + Math.round(rx * c.x) + "',y:'" + Math.round(ry * c.y) + "'}",
+                dataType: "json",
+                success: function(result) {
+                    alert('success');
+                }
+            });
         });
+        
 
         return false;
     });
 
-    
+
 
 })
